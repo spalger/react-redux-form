@@ -65,10 +65,10 @@ class SyncValidationRecipe extends React.Component {
           <label>Username</label>
           <input type="text" />
         </Field>
-        { submitValidUserForm.field('username').pending &&
+        { getField(submitValidUserForm, 'username').pending &&
           <span>Validating...</span>
         }
-        { submitValidUserForm.field('username').errors.available &&
+        { getField(submitValidUserForm, 'username').errors.available &&
           <span>Sorry, that username is taken.</span>
         }
         <Field model="submitValidUser.password">

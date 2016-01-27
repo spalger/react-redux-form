@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Field } from 'react-redux-form';
+import { Field, getField } from 'react-redux-form';
 
 import Recipe from '../components/recipe-component';
 
@@ -29,11 +29,11 @@ class UserForm extends React.Component {
           <label htmlFor="">Username</label>
           <input type="text" />
         </Field>
-        { userForm.field('username').pending
+        { getField(userForm, 'username').pending
           ? <div>Checking username...</div>
-          : userForm.field('username').errors.available
+          : getField(userForm, 'username').errors.available
             ? <div>Sorry, that username isn't available.</div>
-            : userForm.field('username').touched
+            : getField(userForm, 'username').touched
               && <div>That username looks great!</div>
         }
       </form>
@@ -60,7 +60,7 @@ class AsyncBlurValidationRecipe extends React.Component {
   render() {
     let { user, userForm } = this.props;
 
-    console.log(userForm.field('user.username').pending);
+    console.log(userForm.fields['username']);
 
     return (
       <Recipe model="user" code={code}>
@@ -72,13 +72,13 @@ class AsyncBlurValidationRecipe extends React.Component {
           }}
           asyncValidateOn="blur">
           <label htmlFor="">Username</label>
-          <input type="text" name="" id=""/>
+          <input type="text" />
         </Field>
-        { userForm.field('username').pending
+        { getField(userForm, 'username').pending
           ? <div className="rsf-error">Checking username...</div>
-          : userForm.field('username').errors.available
+          : getField(userForm, 'username').errors.available
             ? <div className="rsf-error">Sorry, that username isn't available.</div>
-            : userForm.field('username').touched
+            : getField(userForm, 'username').touched
               && <div className="rsf-success">That username looks great!</div>
         }
       </Recipe>

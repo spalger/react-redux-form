@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Field } from 'react-redux-form';
+import { Field, getField } from 'react-redux-form';
 
 import validator from 'validator';
 
@@ -26,7 +26,7 @@ class UserForm extends React.Component {
           <label>Confirm password</label>
           <input type="password" />
 
-          { userForm.field('confirm_password').errors.match
+          { getField(userForm, 'confirm_password').errors.match
             && <div>Passwords don't match.</div>
           }
         </Field>
@@ -58,7 +58,7 @@ class BlurValidationRecipe extends React.Component {
           validateOn="blur">
           <label>Confirm password</label>
           <input type="password" />
-          { userForm.field('confirm_password').errors.match
+          { getField(userForm, 'confirm_password').errors.match
             && <div className="rsf-error">Passwords don't match.</div>
           }
         </Field>

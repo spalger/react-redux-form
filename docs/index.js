@@ -41,6 +41,7 @@ import {
 import './scss/main.scss';
 
 const userReducer = (state, action) => {
+  console.log(action);
   let model = createModelReducer('user', { firstName: 'david', sex: 'F', employed: true, notes: 'testing' })(state, action);
 
   return {
