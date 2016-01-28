@@ -25,7 +25,7 @@ function fooAsyncSubmit(data) {
 
 function fooSubmitAction(data) {
   return (dispatch) => {
-    dispatch(actions.asyncSetValidity('user', (response, done) => {
+    dispatch(actions.asyncSetValidity('user', (_, done) => {
       fooAsyncSubmit(data)
         // Credentials are correct!
         .then(() => {
@@ -57,7 +57,7 @@ class LoginForm extends React.Component {
     let { user, userForm } = this.props;
 
     return (
-      <Recipe model="user" onSubmit={(e) => this.handleSubmit(e)}>
+      <form onSubmit={(e) => this.handleSubmit(e)}>
         <h2>Validation on Submit</h2>
         <p>Psst... the username is <strong>John</strong> and the password is <strong>password</strong></p>
         <Field model="user.username">
@@ -83,7 +83,7 @@ class LoginForm extends React.Component {
               { userForm.pending ? 'Submitting...' : 'Submit' }
             </button>
         }
-      </Recipe>
+      </form>
     );
   }
 }
