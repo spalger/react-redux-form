@@ -32,6 +32,7 @@ import ParseRecipe from './recipes/parse-recipe';
 import VariousControlsRecipe from './recipes/various-controls-recipe';
 import DynamicFieldRecipe from './recipes/dynamic-field-recipe';
 import CustomComponentRecipe from './recipes/custom-component-recipe';
+import NestedStateRecipe from './recipes/nested-state-recipe';
 
 import {
   createModelReducer,
@@ -40,8 +41,9 @@ import {
 
 import './scss/main.scss';
 
+import teamReducer from './reducers/team-reducer';
+
 const userReducer = (state, action) => {
-  console.log(action);
   let model = createModelReducer('user', { firstName: 'david', sex: 'F', employed: true, notes: 'testing' })(state, action);
 
   return {
@@ -50,26 +52,30 @@ const userReducer = (state, action) => {
   }
 }
 
+const pageReducer = (state = '', action) => {
+  if (action.type === 'SET_PAGE') {
+    return action.page;
+  }
+
+  return state;
+}
+
 const store = applyMiddleware(thunk)(createStore)(combineReducers({
+  page: pageReducer,
   user: userReducer,
+  userForm: createFormReducer('user'),
   syncValidUser: createModelReducer('syncValidUser'),
   syncValidUserForm: createFormReducer('syncValidUser'),
   submitValidUser: createModelReducer('submitValidUser'),
   submitValidUserForm: createFormReducer('submitValidUser'),
-  user3: createModelReducer('user3'),
-  user3Form: createFormReducer('user3'),
-  user4: createModelReducer('user4'),
-  user4Form: createFormReducer('user4'),
-  user5: createModelReducer('user5'),
-  user5Form: createFormReducer('user5'),
   info: createModelReducer('info', { phones: [ null ], children: [ null ] }),
-  userForm: createFormReducer('user'),
   multiRecord: createModelReducer('multiRecord', [ {} ]),
   parseUser: createModelReducer('parseUser', { phone: '' }),
   order: createModelReducer('order', {
     shipping: {},
     billing: {}
   }),
+  team: teamReducer
 }));
 
 const recipes = {
@@ -84,43 +90,42 @@ const recipes = {
   'Parse Fields': ParseRecipe,
   'Various Controls': VariousControlsRecipe,
   'Dynamic Fields': DynamicFieldRecipe,
-  'Custom Components': CustomComponentRecipe
+  'Custom Components': CustomComponentRecipe,
+  'Model in Nested State': NestedStateRecipe
 };
 
-const apiReference = [
-  'action creators',
-  'action thunk creators',
-  'reducers',
-  'field component'
-];
+const apiMap = {
+  'Field Component': 'Field-Component',
+  'Action Creators': 'Action-Creators',
+  'Action Thunk Creators': 'Action-Thunk-Creators',
+  'Reducers': 'Reducers',
+}
+
+const guideMap = {
+  'Getting Started': 'Home',
+  'Step by Step': 'Step-by-Step',
+};
 
 const Docs = (props) => (
   <main className="rsf-layout-page">
     <nav className="rsf-layout-nav">
       <h6 className="rsf-heading">Guides</h6>
       <ul className="rsf-list">
-        <li className="rsf-item">
-          <Link className="rsf-anchor" to="/">
-            Getting Started
-          </Link>
-          <Link className="rsf-anchor" to="model-reducer">
-            Model Reducer
-          </Link>
-          <Link className="rsf-anchor" to="form-reducer">
-            Form Reducer
-          </Link>
-          <Link className="rsf-anchor" to="actions">
-            Working with Actions
+      { map(guideMap, (guide, title) =>
+        <li className="rsf-item" key={ guide }>
+          <Link className="rsf-anchor" to={`api/${guide}`}>
+            { title }
           </Link>
         </li>
+      )}
       </ul>
       <h6 className="rsf-heading">API Reference</h6>
       <ul className="rsf-list">
-        { apiReference.map((item, index) =>
-          <li className="rsf-item" key={ index }>
+        { map(apiMap, (item, title) =>
+          <li className="rsf-item" key={ item }>
             <Link className="rsf-anchor"
-              to={`api/${kebabCase(item)}`}>
-              { startCase(item) }
+              to={`api/${item}`}>
+              { title }
             </Link>
           </li>
         )}
@@ -155,7 +160,7 @@ class App extends React.Component {
             <Route path="actions" component={ ActionsPage }/>
             <Route path="model-reducer" component={ ModelReducerPage }/>
             <Route path="form-reducer" component={ FormReducerPage }/>
-            <Route path="api/:item" component={ ApiPage } />
+            <Route path="api/:page" component={ ApiPage } />
             <Route path="recipe" component={ Recipes }>
             { map(recipes, (recipe, recipeName) => 
               <Route path={kebabCase(recipeName)}
