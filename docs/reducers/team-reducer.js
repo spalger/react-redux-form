@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { createModelReducer } from 'react-redux-form';
+import { createModelReducer, createFormReducer } from 'react-redux-form';
 
 // Array of all users
 function membersReducer(state = [], action) {

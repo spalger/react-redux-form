@@ -101,7 +101,7 @@ class NestedStateRecipe extends React.Component {
     let { team } = this.props;
 
     return (
-      <Recipe model="team" code={ code }>
+      <Recipe model="team.newMember" form="newMemberForm" code={ code }>
         <h2>Model in Nested State</h2>
 
         <Field model="team.newMember.name">

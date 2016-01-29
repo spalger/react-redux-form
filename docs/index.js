@@ -75,7 +75,8 @@ const store = applyMiddleware(thunk)(createStore)(combineReducers({
     shipping: {},
     billing: {}
   }),
-  team: teamReducer
+  team: teamReducer,
+  newMemberForm: createFormReducer('team.newMember')
 }));
 
 const recipes = {

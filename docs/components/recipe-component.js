@@ -12,7 +12,9 @@ class Recipe extends React.Component {
     }
   }
   render() {
-    let { name, children, model, code } = this.props;
+    let { name, children, model, form = `${model}Form`, code } = this.props;
+
+    console.log(form, get(this.props, form));
 
     return (
       <div className="rsf-recipe">
@@ -28,7 +30,7 @@ class Recipe extends React.Component {
           <span
             className={`rsf-tab ${this.state.data === 'model' ? '-active' : ''}`}
             onClick={() => this.setState({data: 'model'})}>Model</span>
-          { get(this.props, `${model}Form`) &&
+          { get(this.props, form) &&
             <span
               className={`rsf-tab ${this.state.data === 'form' ? '-active' : ''}`}
               onClick={() => this.setState({data: 'form'})}>Form</span>
@@ -38,7 +40,7 @@ class Recipe extends React.Component {
             <pre>{ JSON.stringify(get(this.props, model), null, 2) }</pre>
           }
           { this.state.data === 'form' && 
-            <pre>{ JSON.stringify(get(this.props, `${model}Form`), null, 2) }</pre>
+            <pre>{ JSON.stringify(get(this.props, form), null, 2) }</pre>
           }
         </div>
 
