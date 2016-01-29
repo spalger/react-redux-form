@@ -97,6 +97,7 @@ const apiMap = {
   'Action Creators': 'API:-Action-Creators',
   'Action Thunk Creators': 'API:-Action-Thunk-Creators',
   'Reducers': 'API:-Reducers',
+  'Utilities': 'API:-Utilities'
 }
 
 const guideMap = {
