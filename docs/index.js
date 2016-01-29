@@ -8,16 +8,13 @@ import {
   Route,
   IndexRoute,
   Link,
+  Redirect,
   hashHistory
 } from 'react-router';
 import kebabCase from 'lodash/string/kebabCase';
 import startCase from 'lodash/string/startCase';
 import map from 'lodash/collection/map';
 
-import IntroPage from './pages/intro-page';
-import ActionsPage from './pages/actions-page';
-import ModelReducerPage from './pages/model-reducer-page';
-import FormReducerPage from './pages/form-reducer-page';
 import ApiPage from './pages/api-page';
 
 import SyncValidationRecipe from './recipes/sync-validation-recipe';
@@ -96,15 +93,17 @@ const recipes = {
 };
 
 const apiMap = {
-  'Field Component': 'Field-Component',
-  'Action Creators': 'Action-Creators',
-  'Action Thunk Creators': 'Action-Thunk-Creators',
-  'Reducers': 'Reducers',
+  'Field Component': 'API:-Field-Component',
+  'Action Creators': 'API:-Action-Creators',
+  'Action Thunk Creators': 'API:-Action-Thunk-Creators',
+  'Reducers': 'API:-Reducers',
 }
 
 const guideMap = {
   'Getting Started': 'Home',
-  'Step by Step': 'Step-by-Step',
+  'Step by Step': 'Guide:-Step-by-Step',
+  'Model Reducers': 'Guide:-Model-Reducers',
+  'Form Reducers': 'Guide:-Form-Reducers',
 };
 
 const Docs = (props) => (
@@ -156,11 +155,8 @@ class App extends React.Component {
     return (
       <Provider store={ store }>
         <Router history={ hashHistory }>
+          <Redirect from="/" to="api/Home" />
           <Route path="/" component={ Docs }>
-            <IndexRoute component={ IntroPage } />
-            <Route path="actions" component={ ActionsPage }/>
-            <Route path="model-reducer" component={ ModelReducerPage }/>
-            <Route path="form-reducer" component={ FormReducerPage }/>
             <Route path="api/:page" component={ ApiPage } />
             <Route path="recipe" component={ Recipes }>
             { map(recipes, (recipe, recipeName) => 
