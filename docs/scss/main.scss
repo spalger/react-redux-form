@@ -6,7 +6,8 @@ $colors: (
   'label': #BCBCBC,
   'border': #EDEDED,
   'dark': #272E35,
-  'code': rgba(#272E35, 0.1)
+  'code': rgba(#272E35, 0.1),
+  'link': #647688
 );
 
 @function colors($key) {
@@ -18,6 +19,7 @@ html, body, #app {
   width: 100%;
   margin: 0;
   padding: 0;
+  line-height: 1.4;
 }
 
 *, *:before, *:after {
@@ -88,6 +90,19 @@ html, body, #app {
   h1 { @extend %heading--huge; }
   p { @extend %paragraph; }
   ul { @extend %list; }
+
+  a {
+    color: colors('link');
+    background-image: linear-gradient(to right, transparent 50%, #{rgba(colors('link'), 0.1)} 50%);
+    background-position: 0;
+    // make the background twice as big
+    background-size: 200%;
+    transition: all 0.4s;
+
+    &:hover {
+      background-position: -100%;
+    }
+  }
 
   hr {
     border-style: solid;
