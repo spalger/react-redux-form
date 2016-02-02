@@ -14,8 +14,6 @@ class Recipe extends React.Component {
   render() {
     let { name, children, model, form = `${model}Form`, code } = this.props;
 
-    console.log(form, get(this.props, form));
-
     return (
       <div className="rsf-recipe">
         <form

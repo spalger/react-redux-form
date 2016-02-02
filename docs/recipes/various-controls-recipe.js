@@ -91,19 +91,20 @@ class VariousControlsRecipe extends React.Component {
         <Field model="user.favoriteColor">
           <label>Favorite Color</label>
           <label>
-            <input type="radio" value="red"/>
+            <input type="radio" value="#ff0000"/>
             <span>Red</span>
           </label>
           <label>
-            <input type="radio" value="white"/>
+            <input type="radio" value="#ffffff"/>
             <span>White</span>
           </label>
           <label>
-            <input type="radio" value="blue"/>
+            <input type="radio" value="#0000ff"/>
             <span>Blue</span>
           </label>
+          <input type="color" value={ user.favoriteColor }/>
         </Field>
-        <button type="button" onClick={() => dispatch(actions.change('user.favoriteColor', 'red'))}>
+        <button type="button" onClick={() => dispatch(actions.change('user.favoriteColor', '#ff0000'))}>
           Change color to Red
         </button>
 
