@@ -98,6 +98,7 @@ const apiMap = {
   'Action Creators': 'API:-Action-Creators',
   'Action Thunk Creators': 'API:-Action-Thunk-Creators',
   'Reducers': 'API:-Reducers',
+  'Enhancers': 'API:-Enhancers',
   'Utilities': 'API:-Utilities'
 }
 
@@ -106,6 +107,7 @@ const guideMap = {
   'Step by Step': 'Guide:-Step-by-Step',
   'Model Reducers': 'Guide:-Model-Reducers',
   'Form Reducers': 'Guide:-Form-Reducers',
+  'Using Existing Reducers': 'Guide:-Using-Existing-Reducers'
 };
 
 const Docs = (props) => (

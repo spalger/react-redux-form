@@ -148,6 +148,15 @@ class VariousControlsRecipe extends React.Component {
             <option value="3">Item 3</option>
           </select>
         </Field>
+
+        <Field model="user.age">
+          <label>Age</label>
+          <input type="range" />
+        </Field>
+
+        <Field model="user.avatar">
+          <input type="file" placeholder="Upload an avatar"/>
+        </Field>
       </Recipe>
     );
   }

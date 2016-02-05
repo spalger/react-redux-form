@@ -126,7 +126,7 @@ html, body, #app {
     margin-bottom: 1rem;
   }
 
-  input:not([type="radio"]):not([type="checkbox"]):not([style]), textarea {
+  input:not([type="radio"]):not([type="checkbox"]):not([style]):not([type="range"]), textarea {
     font-size: 1rem;
     line-height: 1;
     padding: 0.5rem;
