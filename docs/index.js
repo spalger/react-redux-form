@@ -41,7 +41,6 @@ import './scss/main.scss';
 import teamReducer from './reducers/team-reducer';
 
 const userReducer = (state, action) => {
-  console.log(action);
   let model = createModelReducer('user', { firstName: 'david', sex: 'F', employed: true, notes: 'testing' })(state, action);
 
   return {
@@ -154,11 +153,15 @@ const Docs = (props) => (
 
 const Recipes = (props) => <div>{props.children}</div>;
 
+const scrollTop = () => document
+  .querySelector('.rsf-layout-content')
+  .scrollTop = 0;
+
 class App extends React.Component {
   render() {
     return (
       <Provider store={ store }>
-        <Router history={ hashHistory }>
+        <Router history={ hashHistory } onUpdate={scrollTop}>
           <Redirect from="/" to="api/Home" />
           <Route path="/" component={ Docs }>
             <Route path="api/:page" component={ ApiPage } />

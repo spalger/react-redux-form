@@ -77,8 +77,6 @@ class SyncValidationRecipe extends React.Component {
   render() {
     let { user, userForm, dispatch } = this.props;
 
-    console.log(getField(userForm, 'username'));
-
     return (
       <Recipe model="user" code={code}>
         <h2>Sync Validation</h2>

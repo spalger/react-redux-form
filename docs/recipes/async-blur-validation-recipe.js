@@ -60,8 +60,6 @@ class AsyncBlurValidationRecipe extends React.Component {
   render() {
     let { user, userForm } = this.props;
 
-    console.log(userForm.fields['username']);
-
     return (
       <Recipe model="user" code={code}>
         <h2>Async Blur Validation</h2>
