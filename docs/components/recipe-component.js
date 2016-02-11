@@ -71,7 +71,9 @@ class Recipe extends React.Component {
   componentDidMount() {
     let { dispatch, name } = this.props;
 
-    dispatch(getRecipe(name));
+    if (name) {
+      dispatch(getRecipe(name));
+    }
   }
 }
 
