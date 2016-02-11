@@ -1,30 +1,45 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Field, actions } from 'react-redux-form';
+import { Field, actions, createFieldClass } from 'react-redux-form';
 
-import Select from 'react-select';
+import TextField from 'material-ui/lib/text-field';
+import Slider from 'material-ui/lib/slider';
+import Checkbox from 'material-ui/lib/checkbox';
 
 import Recipe from '../components/recipe-component';
+
+const MaterialField = createFieldClass({
+  'Slider': (props) => ({
+    onChange: (e, val) => props.onChange(val),
+    value: props.modelValue
+  }),
+  'Checkbox': (props) => ({
+    onCheck: (e, val) => props.onChange(val),
+    checked: !!props.modelValue
+  })
+},
+{
+  'TextField': 'text'
+});
 
 class CustomComponentRecipe extends React.Component {
   render() {
     let { user, dispatch } = this.props;
-    let options = [
-      { value: 'haskell', label: 'Haskell' },
-      { value: 'elm', label: 'Elm' },
-      { value: 'ocaml', label: 'OCaml' },
-      { value: 'elixir', label: 'Elixir' }
-    ];
 
     return (
       <Recipe name="custom-component" model="user">
-        <Select
-          name="form-field-name"
-          placeholder="Select a language..."
-          value={ user.language }
-          options={options}
-          onChange={(val) => dispatch(actions.change('user.language', val))}
-        />
+        <strong>Material Design</strong>
+        <MaterialField model="user.name">
+          <TextField />
+        </MaterialField>
+
+        <MaterialField model="user.age">
+          <Slider step={1} value={25} max={100} />
+        </MaterialField>
+
+        <MaterialField model="user.lovesRedux">
+          <Checkbox label="Love Redux?" />
+        </MaterialField>
       </Recipe>
     );
   }
