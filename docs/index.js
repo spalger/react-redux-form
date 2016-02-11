@@ -57,8 +57,21 @@ const pageReducer = (state = '', action) => {
   return state;
 }
 
+const recipeReducer = (state = {}, action) => {
+  switch (action.type) {
+    case 'SET_RECIPE':
+      return {
+        name: action.name,
+        code: action.code
+      }
+    default:
+      return state;
+  }
+}
+
 const store = applyMiddleware(thunk)(createStore)(combineReducers({
   page: pageReducer,
+  recipe: recipeReducer,
   user: userReducer,
   userForm: createFormReducer('user'),
   syncValidUser: createModelReducer('syncValidUser'),

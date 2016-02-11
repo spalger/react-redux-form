@@ -1,7 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import get from 'lodash/object/get';
+import startCase from 'lodash/string/startCase';
+import words from 'lodash/string/words';
 import Code from './code-component';
+
+import getRecipe from '../actions/recipe-actions';
+
+function formatCode(code) {
+  return code
+    .replace(/import Recipe.*/ig, '')
+    .replace(/(\n){3,}/g, '\n\n')
+    .replace(/<Recipe.*/ig, '<form>')
+    .replace(/<\/Recipe>/ig, '</form>')
+}
 
 class Recipe extends React.Component {
   constructor() {
@@ -12,7 +24,16 @@ class Recipe extends React.Component {
     }
   }
   render() {
-    let { name, children, model, form = `${model}Form`, code } = this.props;
+    let {
+      recipe,
+      name,
+      children,
+      model,
+      form = `${model}Form`,
+      code
+    } = this.props;
+
+    const recipeCode = code || recipe.code;
 
     return (
       <div className="rsf-recipe">
@@ -20,7 +41,7 @@ class Recipe extends React.Component {
           name={ name }
           className="rsf-content"
           onSubmit={this.props.onSubmit}>
-            <h3>{ name }</h3>
+            <h3>{ startCase(words(name)) } Recipe</h3>
             { children }
         </form>
 
@@ -41,10 +62,16 @@ class Recipe extends React.Component {
             <pre>{ JSON.stringify(get(this.props, form), null, 2) }</pre>
           }
         </div>
+        { recipeCode && <Code className="rsf-code" content={formatCode(recipeCode)} /> }
 
-        { code && <Code className="rsf-code" content={code} /> }
       </div>
     );
+  }
+
+  componentDidMount() {
+    let { dispatch, name } = this.props;
+
+    dispatch(getRecipe(name));
   }
 }
 
