@@ -28,7 +28,7 @@ class CustomComponentRecipe extends React.Component {
 
     return (
       <Recipe name="custom-component" model="user">
-        <strong>Material Design</strong>
+        <h4>Material Design</h4>
         <MaterialField model="user.name">
           <TextField />
         </MaterialField>
