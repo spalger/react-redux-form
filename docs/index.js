@@ -119,6 +119,7 @@ const guideMap = {
   'Step by Step': 'Guide:-Step-by-Step',
   'Model Reducers': 'Guide:-Model-Reducers',
   'Form Reducers': 'Guide:-Form-Reducers',
+  'Validation': 'Guide:-Validation',
   'Using Existing Reducers': 'Guide:-Using-Existing-Reducers',
   'Redux-Form Comparison': 'Guide:-Redux-Form-Comparison'
 };
