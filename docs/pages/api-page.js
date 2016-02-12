@@ -9,8 +9,6 @@ class ApiPage extends React.Component {
   componentWillMount() {
     let { dispatch, params } = this.props;
 
-    console.log(params.page);
-
     dispatch(getPage(params.page));
   }
 
