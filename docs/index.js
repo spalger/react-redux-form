@@ -121,7 +121,8 @@ const guideMap = {
   'Form Reducers': 'Guide:-Form-Reducers',
   'Validation': 'Guide:-Validation',
   'Using Existing Reducers': 'Guide:-Using-Existing-Reducers',
-  'Redux-Form Comparison': 'Guide:-Redux-Form-Comparison'
+  'Redux-Form Comparison': 'Guide:-Redux-Form-Comparison',
+  'Custom Components': 'Guide:-React-Native-&-Custom-Components'
 };
 
 const Docs = (props) => (
